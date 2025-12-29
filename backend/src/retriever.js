@@ -38,8 +38,6 @@ const buildDocsIndex = async () => {
 };
 
 const retrieveDocs = async (question, store) => {
-  // Store is expected to be the object returned by vectorStore()
-  // which exposes similaritySearch
   return await store.similaritySearch(question);
 };
 

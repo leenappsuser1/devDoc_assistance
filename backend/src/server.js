@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import { vectorStore } from "./vectorStorage.js";
 import { retrieveDocs } from "./retriever.js";
 import { generateAnswer } from "./generator.js";
@@ -6,10 +7,10 @@ import { buildDocsIndex } from "./retriever.js";
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 // 🔥 Create store once on startup
 const docs = await buildDocsIndex();
-// console.log(`[Startup] Loaded ${docs.length} document chunks.`);
 const store = await vectorStore(docs);
 
 app.post("/ask", async (req, res) => {
